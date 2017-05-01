@@ -1,24 +1,24 @@
 package com.example.anthagonas.wakemehud;
 
-        import android.os.Bundle;
-        import android.support.v4.app.Fragment;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.TextView;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-        import com.android.volley.Request;
-        import com.android.volley.Response;
-        import com.android.volley.VolleyError;
-        import com.android.volley.toolbox.JsonObjectRequest;
-        import com.android.volley.toolbox.Volley;
-        import com.example.anthagonas.wakemehud.R;
-        import com.example.anthagonas.wakemehud.WeatherModel;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.utilisateur92.weather.R;
+import com.example.utilisateur92.weather.models.WeatherModel;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,20 +36,19 @@ public class WeatherFragment extends Fragment {
     private String mParam2;
 
 
-    final String URL_BASE = "http://api.openweathermap.org/data/2.5/forecast";
+    final String URL_BASE = "http://api.openweathermap.org/data/2.5/weather";
     final String URL_COORD = "?lat=44.8079982&lon=-0.6101602";
-    final String URL_UNIT = "&units=metric";
+    final String URL_UNIT = "&units=metric&lang=fr";
     final String URL_API = "&APPID=77a9aa0c33440f409f740a67601c43d5";
 
     //initialisation view
     private TextView maxTempView;
-    private TextView minTempView;
     private TextView statusWeather;
     private TextView cityName;
 
     private WeatherModel WeatherModel = new WeatherModel();
 
-    // 44.8079982,-0.6101602
+// 44.8079982,-0.6101602
     public WeatherFragment() {
         // Required empty public constructor
     }
@@ -87,41 +86,35 @@ public class WeatherFragment extends Fragment {
             public void onResponse(JSONObject response){
 
                 try {
-                    JSONObject jsonObjectCity = response.getJSONObject("city");
-                    String nameCity = jsonObjectCity.getString("name");
-                    String country = jsonObjectCity.getString("country");
+                    String nameCity = response.getString("name");
 
-                    JSONArray list = response.getJSONArray("list");
-                    JSONObject jsonListIndex = list.getJSONObject(0);
-                    JSONObject jsonObjectMain = jsonListIndex.getJSONObject("main");
-                    JSONArray weatherArray = jsonListIndex.getJSONArray("weather");
-                    JSONObject weather = weatherArray.getJSONObject(0);
+                    JSONObject jsonObjectMain = response.getJSONObject("main");
+                    JSONObject details = response.getJSONArray("weather").getJSONObject(0);
 
 
-                    //temperature min et max
-                    Double temp_min = jsonObjectMain.getDouble("temp_min");
-                    Double temp_max = jsonObjectMain.getDouble("temp_max");
 
-                    String weatherStatus = weather.getString("main");
+                    //temperature
+
+                    Double current_temp = jsonObjectMain.getDouble("temp");
+
+                    String weatherStatus = details.getString("description");
 
                     // Set Value
                     WeatherModel.setNameCity(nameCity);
-                    WeatherModel.setCountry(country);
-                    WeatherModel.setTemp_min(temp_min.intValue());
-                    WeatherModel.setTemp_max(temp_max.intValue());
+
+                    WeatherModel.setTemp_max(current_temp.intValue());
                     WeatherModel.setWeatherStatus(weatherStatus);
 
                     //declaration
 
                     maxTempView = (TextView) v.findViewById(R.id.maxTempView);
-                    minTempView = (TextView) v.findViewById(R.id.minTempView);
                     statusWeather =(TextView) v.findViewById(R.id.weatherStatus);
                     cityName = (TextView) v.findViewById(R.id.cityName);
 
                     //dynamic data like API
 
                     maxTempView.setText(String.valueOf(WeatherModel.getTemp_max())+"°");
-                    minTempView.setText(String.valueOf(WeatherModel.getTemp_min()+"°"));
+
                     statusWeather.setText(WeatherModel.getWeatherStatus());
                     cityName.setText(WeatherModel.getNameCity());
 
