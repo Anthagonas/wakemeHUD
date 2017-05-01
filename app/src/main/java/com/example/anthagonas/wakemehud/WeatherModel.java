@@ -9,7 +9,6 @@ public class WeatherModel {
     private String nameCity;
     private String country;
     private String weatherStatus;
-    private int temp_min;
     private int temp_max;
 
 
@@ -37,19 +36,3 @@ public class WeatherModel {
         this.weatherStatus = weatherStatus;
     }
 
-    public double getTemp_min() {
-        return temp_min;
-    }
-
-    public void setTemp_min(int temp_min) {
-        this.temp_min = temp_min;
-    }
-
-    public double getTemp_max() {
-        return temp_max;
-    }
-
-    public void setTemp_max(int temp_max) {
-        this.temp_max = temp_max;
-    }
-}
