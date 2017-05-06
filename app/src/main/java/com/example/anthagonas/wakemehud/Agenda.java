@@ -37,7 +37,7 @@ public class Agenda extends Fragment {
         {
             @Override
             public boolean onTouch(View v, MotionEvent event){
-                return ((MainActivity)getActivity()).onTouchEvent(event);
+                return getActivity().onTouchEvent(event);
             }
         });
         return view;

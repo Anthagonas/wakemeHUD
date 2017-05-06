@@ -35,7 +35,7 @@ public class Rss extends Fragment implements OnItemClickListener {
         {
             @Override
             public boolean onTouch(View v, MotionEvent event){
-                return ((MainActivity)getActivity()).onTouchEvent(event);
+                return getActivity().onTouchEvent(event);
             }
         });
         return view;
