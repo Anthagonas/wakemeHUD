@@ -26,7 +26,7 @@ public class Agenda extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
         this.evenements = new AgendaList(this.getContext());
-        this.evenements.majList();
+        this.evenements.initList();
         this.listView = (ListView) view.findViewById(R.id.eventlistview);
         listView.setAdapter(new AgendaListLayoutAdapter(this.getContext(),evenements.getNomEvenement(),
                 evenements.getDateDepartEvenement(),evenements.getDureeEvenement()));

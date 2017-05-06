@@ -4,10 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 public class AgendaListLayoutAdapter extends BaseAdapter {
 
-    private ArrayList<String> noms;
-    private ArrayList<String> dates;
-    private ArrayList<String > duree;
+    private ArrayList<String> noms; // ArrayList contenant les noms des evenements
+    private ArrayList<String> dates; // ArrayList contenant les dates de début des evenements
+    private ArrayList<String > duree; // ArrayList contenant la duree des evenements
 
     private LayoutInflater mInflater;
 
