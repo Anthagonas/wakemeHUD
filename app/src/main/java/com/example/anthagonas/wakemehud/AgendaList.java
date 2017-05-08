@@ -44,30 +44,31 @@ public class AgendaList {
 
     public void initList() {
         // Recupere la liste de tout les evenements des agendas synchronises avec l'appareil
-        Log.d("initList","query");
         Cursor eventCursor = contentResolver.query(URI_parser, CHAMPS, null, null, null);
 
         try {
             if (eventCursor.getCount() > 0) {
-                Log.d("initList","in if");
                 eventCursor.moveToFirst();
                 this.nomEvenement.add(eventCursor.getString(0));
                 this.dateDepartEvenement.add(eventCursor.getString(1));
                 this.dureeEvenement.add(eventCursor.getString(2));
-                Log.d("initList","updated lists");
                 //Pour chaque element du curseur (donc chaque evenement)
                 while (eventCursor.moveToNext()) {
-                    Log.d("initList","in while loop");
-                    String idEvent = eventCursor.getString(0);
+                    String nomEvent = eventCursor.getString(0);
                     String date = new Date(eventCursor.getLong(1)).toString();
-                    //String date = eventCursor.getString(1);
                     String duree = eventCursor.getString(2);
-                    this.nomEvenement.add(idEvent); // recuperation du nom de l'evenement
+                    //TODO : n'ajouter que les evenements dont la date est dans les 7 jours a venir
+                    this.nomEvenement.add(nomEvent); // recuperation du nom de l'evenement
                     this.dateDepartEvenement.add(date); // recuperation de la date de depart
                     this.dureeEvenement.add(duree); // recuperation de la duree de l'evenement
                 }
+                if (nomEvenement.size() == 0)
+                {
+                    nomEvenement.add("Aucun Evenement");
+                    dateDepartEvenement.add(" ");
+                    dureeEvenement.add(" ");
 
-                Log.d("initList","end while");
+                }
             }
             else
             {
