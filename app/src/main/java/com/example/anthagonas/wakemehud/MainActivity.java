@@ -31,7 +31,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
     int permissionAgendaTAG = 42; // Valeur empirique, permettant juste de donner un code a la demande d'autorisation
 
     //Variables pour la detection de mouvements
-    private float x1,x2;
+    private float x1,x2,y1,y2; // position ou le doigt est appuye
     static final int MIN_DISTANCE = 150; // Valeur empirique
 
     @Override
@@ -131,19 +131,22 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 x1 = event.getX();
+                y1 = event.getY();
                 break;
             case MotionEvent.ACTION_UP:
                 x2 = event.getX();
+                y2 = event.getY();
 
                 float deltaX = x1 - x2;
-                if (Math.abs(deltaX) > MIN_DISTANCE && (x1>x2)) // le deplacement du doigt de droite a gauche est suffisant
+                float deltaY = y1 - y2; // permet d'annuler le swipe si il est fait verticalement
+                if (Math.abs(deltaX) > MIN_DISTANCE && (x1>x2) && Math.abs(deltaY) < MIN_DISTANCE) // le deplacement du doigt de droite a gauche est significatif
                 {
                     fragmentListPosition = (fragmentListPosition+1)%fragmentList.size(); // se déplace dans la liste des fragments
                     FragmentTransaction fragmentManager= getSupportFragmentManager().beginTransaction();
                     fragmentManager.replace(R.id.framelayout, fragmentList.get(fragmentListPosition)); // Remplace le fragment actuel par le suivant dans la liste
                     fragmentManager.commit();
                 }
-                else if (Math.abs(deltaX) > MIN_DISTANCE) // le deplacement du doigt de gauche a droite est suffisant
+                else if (Math.abs(deltaX) > MIN_DISTANCE && Math.abs(deltaY) < MIN_DISTANCE) // le deplacement du doigt de gauche a droite est significatif
                 {
                     fragmentListPosition = (fragmentListPosition-1); // se déplace dans la liste des fragments
                     if (fragmentListPosition<0){ fragmentListPosition = fragmentList.size()-1;}
