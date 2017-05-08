@@ -9,6 +9,7 @@ import android.provider.CalendarContract;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Anthagonas on 05/05/2017.
@@ -58,7 +59,8 @@ public class AgendaList {
                 while (eventCursor.moveToNext()) {
                     Log.d("initList","in while loop");
                     String idEvent = eventCursor.getString(0);
-                    String date = eventCursor.getString(1);
+                    String date = new Date(eventCursor.getLong(1)).toString();
+                    //String date = eventCursor.getString(1);
                     String duree = eventCursor.getString(2);
                     this.nomEvenement.add(idEvent); // recuperation du nom de l'evenement
                     this.dateDepartEvenement.add(date); // recuperation de la date de depart
