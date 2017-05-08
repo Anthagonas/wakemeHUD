@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,22 +19,18 @@ import android.widget.Toast;
  */
 
 public class Agenda extends Fragment {
-    GridView gridView;
-
-    static final String[] numbers = new String[] {
-            "A", "B", "C", "D", "E",
-            "F", "G", "H", "I", "J",
-            "K", "L", "M", "N", "O",
-            "P", "Q", "R", "S", "T",
-            "U", "V", "W", "X", "Y", "Z"};
+    ListView listView;
+    AgendaList evenements;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
-        this.gridView = (GridView) view.findViewById(R.id.gridView1);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, numbers);
-        gridView.setAdapter(adapter);
-        gridView.setOnTouchListener(new View.OnTouchListener()
+        this.evenements = new AgendaList(this.getContext());
+        this.evenements.initList();
+        this.listView = (ListView) view.findViewById(R.id.eventlistview);
+        listView.setAdapter(new AgendaListLayoutAdapter(this.getContext(),evenements.getNomEvenement(),
+                evenements.getDateDepartEvenement(),evenements.getDureeEvenement()));
+        listView.setOnTouchListener(new View.OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event){
