@@ -43,16 +43,20 @@ public class AgendaList {
 
     public void initList() {
         // Recupere la liste de tout les evenements des agendas synchronises avec l'appareil
+        Log.d("initList","query");
         Cursor eventCursor = contentResolver.query(URI_parser, CHAMPS, null, null, null);
 
         try {
-            if (eventCursor.getCount() == 0) {
+            if (eventCursor.getCount() > 0) {
+                Log.d("initList","in if");
                 eventCursor.moveToFirst();
                 this.nomEvenement.add(eventCursor.getString(0));
                 this.dateDepartEvenement.add(eventCursor.getString(1));
                 this.dureeEvenement.add(eventCursor.getString(2));
+                Log.d("initList","updated lists");
                 //Pour chaque element du curseur (donc chaque evenement)
                 while (eventCursor.moveToNext()) {
+                    Log.d("initList","in while loop");
                     String idEvent = eventCursor.getString(0);
                     String date = eventCursor.getString(1);
                     String duree = eventCursor.getString(2);
@@ -60,6 +64,8 @@ public class AgendaList {
                     this.dateDepartEvenement.add(date); // recuperation de la date de depart
                     this.dureeEvenement.add(duree); // recuperation de la duree de l'evenement
                 }
+
+                Log.d("initList","end while");
             }
             else
             {

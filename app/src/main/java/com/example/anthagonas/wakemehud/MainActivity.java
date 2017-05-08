@@ -1,13 +1,17 @@
 package com.example.anthagonas.wakemehud;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +26,10 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
     protected ArrayList <T> fragmentList = new ArrayList <T>();
     protected int fragmentListPosition = 0;
 
+    //Variable determinant si l'appli est autorisee a utiliser le fragment Agenda :
+    int permissionAgenda;
+    int permissionAgendaTAG = 42; // Valeur empirique, permettant juste de donner un code a la demande d'autorisation
+
     //Variables pour la detection de mouvements
     private float x1,x2;
     static final int MIN_DISTANCE = 150; // Valeur empirique
@@ -30,6 +38,11 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Verification des autorisations de l'application :
+        this.permissionAgenda = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CALENDAR);
+
 
         //recuperation de l'etat de la batterie
         registerReceiver(infos_batterie, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -46,7 +59,21 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         fragmentList.add(notif);
         fragmentList.add(meteo);
         fragmentList.add(rss);
-        fragmentList.add(agenda);
+        if (permissionAgenda != PackageManager.PERMISSION_GRANTED) // si l'acces aux calendriers n'est pas autorise :
+        {
+            //demande d'acces aux calendriers de l'appareil
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_CALENDAR},
+                    permissionAgendaTAG);
+            if (permissionAgenda == PackageManager.PERMISSION_GRANTED) // si l'utilisateur accepte l'acces :
+            {
+                fragmentList.add(agenda);
+            }
+        }
+        else // si l'acces aux calendriers est autorise :
+        {
+            fragmentList.add(agenda);
+        }
         fragmentList.add(agregateur);
 
 
