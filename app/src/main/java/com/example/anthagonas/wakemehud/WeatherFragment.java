@@ -13,8 +13,6 @@ package com.example.anthagonas.wakemehud;
         import com.android.volley.VolleyError;
         import com.android.volley.toolbox.JsonObjectRequest;
         import com.android.volley.toolbox.Volley;
-        import com.example.anthagonas.wakemehud.R;
-        import com.example.anthagonas.wakemehud.WeatherModel;
 
         import org.json.JSONArray;
         import org.json.JSONException;

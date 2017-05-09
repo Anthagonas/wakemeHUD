@@ -25,7 +25,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
 
     //Variables pour la detection de mouvements
     private float x1,x2;
-    static final int MIN_DISTANCE = 150;
+    static final int MIN_DISTANCE = 150; // Valeur empirique
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
