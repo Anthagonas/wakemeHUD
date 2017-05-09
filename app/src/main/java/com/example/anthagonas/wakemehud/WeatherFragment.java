@@ -118,10 +118,11 @@ public class WeatherFragment extends Fragment {
 
                     //dynamic data like API
 
-                    maxTempView.setText(String.valueOf(WeatherModel.getTemp_max())+"°");
-                    minTempView.setText(String.valueOf(WeatherModel.getTemp_min()+"°"));
-                    statusWeather.setText(WeatherModel.getWeatherStatus());
-                    cityName.setText(WeatherModel.getNameCity());
+                    maxTempView.setText("Température maximale : "+String.valueOf(WeatherModel.getTemp_max())+"°");
+                    minTempView.setText("Température minimale : "+String.valueOf(WeatherModel.getTemp_min()+"°"));
+                    //mettre en francais ou metttre une icone ?
+                    statusWeather.setText("Temps : "+WeatherModel.getWeatherStatus());
+                    cityName.setText("Lieu : "+WeatherModel.getNameCity());
 
 
 
