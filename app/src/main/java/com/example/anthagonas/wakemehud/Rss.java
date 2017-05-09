@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+//liste extensive
+import android.widget.ExpandableListView;
+
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -24,6 +27,9 @@ public class Rss extends Fragment implements OnItemClickListener {
 
     private ProgressBar progressBar;
     private ListView listView;
+
+    //pour liste extensive
+    private ExpandableListView liste_extensive;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
