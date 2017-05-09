@@ -21,7 +21,7 @@ public class RssService extends IntentService {
 
     private static final String RSS_LINK = "http://www.pcworld.com/index.rss";
     public static final String ITEMS = "items";
-    public static final String ACTION_RSS_PARSED = "com.simplerssreader.ACTION_RSS_PARSED";
+    public static final String ACTION_RSS_PARSED = "com.example.anthagonas.wakemehud.ACTION_RSS_PARSED";
 
     public RssService() {
         super("RssService");
@@ -38,7 +38,7 @@ public class RssService extends IntentService {
             Log.w(e.getMessage(), e);
         }
 
-        // Send result
+        // résultat
         Intent resultIntent = new Intent(ACTION_RSS_PARSED);
         resultIntent.putExtra(ITEMS, (Serializable) objetsRss);
         LocalBroadcastManager.getInstance(this).sendBroadcast(resultIntent);
