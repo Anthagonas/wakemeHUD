@@ -4,8 +4,10 @@ package com.example.anthagonas.wakemehud;
         import android.support.v4.app.Fragment;
         import android.util.Log;
         import android.view.LayoutInflater;
+        import android.view.MotionEvent;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.ScrollView;
         import android.widget.TextView;
 
         import com.android.volley.Request;
@@ -40,6 +42,7 @@ public class WeatherFragment extends Fragment {
     final String URL_API = "&APPID=77a9aa0c33440f409f740a67601c43d5";
 
     //initialisation view
+    private ScrollView scrollView;
     private TextView maxTempView;
     private TextView minTempView;
     private TextView statusWeather;
@@ -79,6 +82,7 @@ public class WeatherFragment extends Fragment {
 
         final View v = inflater.inflate(R.layout.fragment_weather, container, false);
         final String url = URL_BASE + URL_COORD + URL_UNIT + URL_API;
+        scrollView = (ScrollView) v.findViewById(R.id.scrollView);
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -141,6 +145,13 @@ public class WeatherFragment extends Fragment {
             }
         });
         Volley.newRequestQueue(getContext()).add(jsonObjectRequest);
+        scrollView.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event){
+                return getActivity().onTouchEvent(event);
+            }
+        });
         return v;
     }
 

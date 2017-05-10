@@ -45,7 +45,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
 
 
         //recuperation de l'etat de la batterie
-        registerReceiver(infos_batterie, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        //registerReceiver(infos_batterie, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         // Ajout des differents fragments
         T bob = (T) new Heure();
@@ -107,7 +107,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         fragmentManager.add(R.id.framelayout, fragmentList.get(0)); // affichage du fragment par defaut (premier dans la liste)
         fragmentManager.commit();
     }
-
+/*
     //affichage de l'etat de la batterie :
     private BroadcastReceiver infos_batterie = new BroadcastReceiver() {
         @Override
@@ -116,7 +116,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
             TextView etat = (TextView) findViewById(R.id.batterie);
             etat.setText("Niveau de batterie: " + Integer.toString(level) + "%");
         }
-    };
+    };*/
 
     // Quitter l'appli lors de l'appui sur la touche retour
     @Override
