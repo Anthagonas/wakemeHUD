@@ -50,7 +50,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         // Ajout des differents fragments
         T bob = (T) new Heure();
         T notif = (T) new Notifications();
-        T meteo = (T) new WeatherFragment();
+        T meteo = (T) new Meteo();
         T rss = (T) new Rss();
         T agenda = (T) new Agenda();
         T agregateur = (T) new Agregateur();

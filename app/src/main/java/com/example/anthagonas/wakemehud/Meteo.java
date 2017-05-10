@@ -22,10 +22,10 @@ package com.example.anthagonas.wakemehud;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link WeatherFragment#newInstance} factory method to
+ * Use the {@link Meteo#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WeatherFragment extends Fragment {
+public class Meteo extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -51,7 +51,7 @@ public class WeatherFragment extends Fragment {
     private WeatherModel WeatherModel = new WeatherModel();
 
     // 44.8079982,-0.6101602
-    public WeatherFragment() {
+    public Meteo() {
         // Required empty public constructor
     }
 
@@ -64,8 +64,8 @@ public class WeatherFragment extends Fragment {
      * @return A new instance of fragment WeatherFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WeatherFragment newInstance(String param1, String param2) {
-        WeatherFragment fragment = new WeatherFragment();
+    public static Meteo newInstance(String param1, String param2) {
+        Meteo fragment = new Meteo();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
