@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 
-public class MainActivity <T extends Fragment> extends AppCompatActivity {
+public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
 
     protected ArrayList <T> fragmentList = new ArrayList <T>();
     protected int fragmentListPosition = 0;
@@ -86,8 +86,8 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                //Intent myIntent = new Intent(MainActivity.this, Parametres.class); // Chargement de l'activite parametres
-                //startActivity(myIntent); // lancement de l'activite
+                Intent myIntent = new Intent(WakeMeHUD.this, Parametres.class); // Chargement de l'activite parametres
+                startActivity(myIntent); // lancement de l'activite
             }
         });
 
