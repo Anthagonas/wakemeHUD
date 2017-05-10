@@ -4,7 +4,7 @@ package com.example.anthagonas.wakemehud;
  * Created by Utilisateur92 on 07/04/2017.
  */
 
-public class MeteoModel {
+public class MeteoModele {
 
     private String nomVille;
     private String pays;
