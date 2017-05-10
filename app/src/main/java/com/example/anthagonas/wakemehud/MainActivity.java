@@ -86,8 +86,8 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent myIntent = new Intent(MainActivity.this, Parametres.class); // Chargement de l'activite parametres
-                startActivity(myIntent); // lancement de l'activite
+                //Intent myIntent = new Intent(MainActivity.this, Parametres.class); // Chargement de l'activite parametres
+                //startActivity(myIntent); // lancement de l'activite
             }
         });
 
