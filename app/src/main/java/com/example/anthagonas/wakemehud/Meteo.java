@@ -48,7 +48,7 @@ public class Meteo extends Fragment {
     private TextView statusWeather;
     private TextView cityName;
 
-    private WeatherModel WeatherModel = new WeatherModel();
+    private MeteoModel MeteoModel = new MeteoModel();
 
     // 44.8079982,-0.6101602
     public Meteo() {
@@ -107,11 +107,11 @@ public class Meteo extends Fragment {
                     String weatherStatus = weather.getString("main");
 
                     // Set Value
-                    WeatherModel.setNameCity(nameCity);
-                    WeatherModel.setCountry(country);
-                    WeatherModel.setTemp_min(temp_min.intValue());
-                    WeatherModel.setTemp_max(temp_max.intValue());
-                    WeatherModel.setWeatherStatus(weatherStatus);
+                    MeteoModel.setNomVille(nameCity);
+                    MeteoModel.setPays(country);
+                    MeteoModel.setTemp_min(temp_min.intValue());
+                    MeteoModel.setTemp_max(temp_max.intValue());
+                    MeteoModel.setWeatherStatus(weatherStatus);
 
                     //declaration
 
@@ -122,15 +122,15 @@ public class Meteo extends Fragment {
 
                     //dynamic data like API
 
-                    maxTempView.setText("Température maximale : "+String.valueOf(WeatherModel.getTemp_max())+"°");
-                    minTempView.setText("Température minimale : "+String.valueOf(WeatherModel.getTemp_min()+"°"));
+                    maxTempView.setText("Température maximale : "+String.valueOf(MeteoModel.getTemp_max())+"°");
+                    minTempView.setText("Température minimale : "+String.valueOf(MeteoModel.getTemp_min()+"°"));
                     //mettre en francais ou metttre une icone ?
-                    statusWeather.setText("Temps : "+WeatherModel.getWeatherStatus());
-                    cityName.setText("Lieu : "+WeatherModel.getNameCity());
+                    statusWeather.setText("Temps : "+ MeteoModel.getWeatherStatus());
+                    cityName.setText("Lieu : "+ MeteoModel.getNomVille());
 
 
 
-                    Log.i("Response City : ", WeatherModel.getNameCity()+" "+WeatherModel.getCountry());
+                    Log.i("Response City : ", MeteoModel.getNomVille()+" "+ MeteoModel.getPays());
                 } catch (JSONException e) {
                     Log.i("Error",e.getMessage());
                 }

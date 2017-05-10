@@ -4,37 +4,37 @@ package com.example.anthagonas.wakemehud;
  * Created by Utilisateur92 on 07/04/2017.
  */
 
-public class WeatherModel {
+public class MeteoModel {
 
-    private String nameCity;
-    private String country;
-    private String weatherStatus;
+    private String nomVille;
+    private String pays;
+    private String etatMeteo;
     private int temp_min;
     private int temp_max;
 
 
-    public String getNameCity() {
-        return nameCity;
+    public String getNomVille() {
+        return nomVille;
     }
 
-    public void setNameCity(String nameCity) {
-        this.nameCity = nameCity;
+    public void setNomVille(String nomVille) {
+        this.nomVille = nomVille;
     }
 
-    public String getCountry() {
-        return country;
+    public String getPays() {
+        return pays;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setPays(String pays) {
+        this.pays = pays;
     }
 
     public String getWeatherStatus() {
-        return weatherStatus;
+        return etatMeteo;
     }
 
-    public void setWeatherStatus(String weatherStatus) {
-        this.weatherStatus = weatherStatus;
+    public void setWeatherStatus(String etatMeteo) {
+        this.etatMeteo = etatMeteo;
     }
 
     public double getTemp_min() {
