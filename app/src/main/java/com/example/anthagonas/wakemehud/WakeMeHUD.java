@@ -39,14 +39,14 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
                 Manifest.permission.READ_CALENDAR);
 
         // Ajout des differents fragments
-        T bob = (T) new Heure();
+        T heure = (T) new Heure();
         T notif = (T) new Notifications();
         T meteo = (T) new Meteo();
         T rss = (T) new Rss();
         T agenda = (T) new Agenda();
         T agregateur = (T) new Agregateur();
 
-        fragmentList.add(bob);
+        fragmentList.add(heure);
         fragmentList.add(notif);
         fragmentList.add(meteo);
         fragmentList.add(rss);
