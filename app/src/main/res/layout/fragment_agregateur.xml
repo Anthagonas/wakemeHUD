@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <fragment
-        android:name="com.example.anthagonas.wakemehud.Heure"
-        android:layout_width="0dp"
-        android:layout_height="25"
-        android:id="@+id/fragment_heure"
-        android:layout_weight="match_parent">
-    </fragment>
-    <fragment
-        android:name="com.example.anthagonas.wakemehud.WeatherFragment"
-        android:layout_width="0dp"
-        android:layout_height="25"
-        android:id="@+id/fragment_weather"
-        android:layout_weight="match_parent">
-    </fragment>
-    <fragment
-        android:name="com.example.anthagonas.wakemehud.Agenda"
-        android:layout_width="0dp"
-        android:layout_height="50"
-        android:id="@+id/fragment_agenda"
-        android:layout_weight="match_parent">
-    </fragment>
+    android:orientation="vertical"
+    android:weightSum="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="4">
+        <fragment
+            android:name="com.example.anthagonas.wakemehud.Agenda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fragment_agenda"
+            android:layout_weight="3">
+        </fragment>
+        <fragment
+            android:name="com.example.anthagonas.wakemehud.Heure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fragment_heure"
+            android:layout_weight="1">
+        </fragment>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+                <fragment
+                    android:name="com.example.anthagonas.wakemehud.Meteo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fragment_weather"
+                    android:layout_weight="2">
+                </fragment>
+        </LinearLayout>
 </LinearLayout>

@@ -1,12 +1,8 @@
 package com.example.anthagonas.wakemehud;
 
 import android.Manifest;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -17,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -100,7 +95,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         { return;} // la suite du code n'est a appliquer que si l'appli demarre
 
         FragmentTransaction fragmentManager = getSupportFragmentManager().beginTransaction();
-        fragmentManager.add(R.id.framelayout, fragmentList.get(0)); // affichage du fragment par defaut (premier dans la liste)
+        fragmentManager.add(R.id.framelayout, fragmentList.get(0)); // affichage du fragment par defaut (içi, premier dans la liste)
         fragmentManager.commit();
     }
 
