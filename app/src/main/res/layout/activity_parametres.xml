@@ -1,46 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.anthagonas.wakemehud.Parametres">
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/unique"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Liste de choix unique"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/unique_liste"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:choiceMode="singleChoice">
-        </ListView>
 
-        <TextView
-            android:id="@+id/multi"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Liste de choix multiples"/>
+                    <TextView
+                        android:id="@+id/unique"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Désactiver la mise en veille automatique du téléphone"
+                        android:layout_marginBottom="20dp" />
 
-        <ListView
-            android:id="@+id/multi_liste"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:choiceMode="multipleChoice">
-        </ListView>
 
-        <Button
-            android:id="@+id/valider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Valider les changements"/>
-    </LinearLayout>
+                    <ToggleButton
+                        android:id="@+id/verrouillage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textOff="Verrouillage activé"
+                        android:textOn="Verrouillage désactivé" />
+
+                    <TextView
+                        android:id="@+id/etat_verrou"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Le verrouillage automatique est désactivé" />
+
+                    <TextView
+                        android:id="@+id/choix_luminosité"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Changer la luminosité du mode HUD"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"/>
+
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="100"/>
+
+                    <TextView
+                        android:id="@+id/txtPercentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/choix_fragment_defaut"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Gerer le frament affiché par défaut"
+                        android:layout_marginTop="20dp"/>
+
+                    <com.example.anthagonas.wakemehud.ListViewNonScrollable
+                        android:id="@+id/unique_liste_fragment"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:choiceMode="singleChoice">
+                    </com.example.anthagonas.wakemehud.ListViewNonScrollable>
+
+                    <TextView
+                        android:id="@+id/heure_format"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Changer le format de la date et de l'heure"
+                        android:layout_marginTop="20dp"/>
+
+                    <com.example.anthagonas.wakemehud.ListViewNonScrollable
+                        android:id="@+id/unique_liste_format_heure"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:choiceMode="singleChoice">
+                    </com.example.anthagonas.wakemehud.ListViewNonScrollable>
+
+                    <TextView
+                        android:id="@+id/choix_fragments_texte"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Choix des fragments affichés"
+                        android:layout_marginTop="20dp"/>
+
+                    <com.example.anthagonas.wakemehud.ListViewNonScrollable
+                        android:id="@+id/choix_fragments"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:choiceMode="multipleChoice"></com.example.anthagonas.wakemehud.ListViewNonScrollable>
+
+                    <TextView
+                        android:id="@+id/choix_flux_rss"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ajouter des flux rss"
+                        android:layout_marginTop="20dp"/>
+
+
+                    <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        android:text="http://" />
+                    <Button
+                        android:id="@+id/valider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_gravity="center"
+                        android:text="Valider les changements" />
+
+                    <Button
+                        android:id="@+id/retour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_gravity="center"
+                        android:text="Retour"
+                        android:layout_alignParentEnd="true"/>
+                </LinearLayout>
+            </ScrollView>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

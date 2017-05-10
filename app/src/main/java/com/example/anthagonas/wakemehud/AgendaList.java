@@ -8,7 +8,10 @@ import android.os.Build;
 import android.provider.CalendarContract;
 import android.util.Log;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -24,6 +27,10 @@ public class AgendaList {
                     CalendarContract.Events.DTSTART,
                     CalendarContract.Events.DURATION
             };
+
+    long septJoursEnMilliSec = 604800000; // 7 jours convertis en millisecondes
+
+    SimpleDateFormat formatDate = new SimpleDateFormat("EEE dd, hh:mm"); // Format de la date de debut de l'evenement
 
 
     //un parser URI permettant de recuperer tout les calendriers synchronises avec l'appareil
@@ -49,18 +56,32 @@ public class AgendaList {
         try {
             if (eventCursor.getCount() > 0) {
                 eventCursor.moveToFirst();
-                this.nomEvenement.add(eventCursor.getString(0));
-                this.dateDepartEvenement.add(eventCursor.getString(1));
-                this.dureeEvenement.add(eventCursor.getString(2));
+                String nomEvent = eventCursor.getString(0);
+                Calendar aujourdhui = Calendar.getInstance();
+                long aujourdhuiMS = aujourdhui.getTimeInMillis(); // Date actuelle en millisec depuis 1 jan 1970
+                long dateMS = eventCursor.getLong(1); // Date de debut de l'evenement en millisec depuis 1 jan 1970
+                String date = formatDate.format(dateMS);
+                String duree = eventCursor.getString(2);
+
+                if (dateMS-aujourdhuiMS < septJoursEnMilliSec && dateMS-aujourdhuiMS > 0) // Si la date est comprise dans les 7 jours a venir
+                {
+                    this.nomEvenement.add(nomEvent);
+                    this.dateDepartEvenement.add(date);
+                    this.dureeEvenement.add(duree);
+                }
                 //Pour chaque element du curseur (donc chaque evenement)
                 while (eventCursor.moveToNext()) {
-                    String nomEvent = eventCursor.getString(0);
-                    String date = new Date(eventCursor.getLong(1)).toString();
-                    String duree = eventCursor.getString(2);
-                    //TODO : n'ajouter que les evenements dont la date est dans les 7 jours a venir
-                    this.nomEvenement.add(nomEvent); // recuperation du nom de l'evenement
-                    this.dateDepartEvenement.add(date); // recuperation de la date de depart
-                    this.dureeEvenement.add(duree); // recuperation de la duree de l'evenement
+                    nomEvent = eventCursor.getString(0);
+                    dateMS = eventCursor.getLong(1);
+                    duree = eventCursor.getString(2);
+                    date = formatDate.format(dateMS); // conversion de la date en jour/heure (voir attribut format)
+                    if (dateMS-aujourdhuiMS < septJoursEnMilliSec && dateMS-aujourdhuiMS > 0) // Si la date est comprise dans les 7 jours a venir
+                    {
+                        //TODO : n'ajouter que les evenements dont la date est dans les 7 jours a venir
+                        this.nomEvenement.add(nomEvent); // recuperation du nom de l'evenement
+                        this.dateDepartEvenement.add(date); // recuperation de la date de depart
+                        this.dureeEvenement.add(duree); // recuperation de la duree de l'evenement
+                    }
                 }
                 if (nomEvenement.size() == 0)
                 {
@@ -80,6 +101,12 @@ public class AgendaList {
         eventCursor.close();
     }
 
+    public void resetListeEvenements ()
+    {
+        nomEvenement.clear();
+        dateDepartEvenement.clear();
+        dureeEvenement.clear();
+    }
     //getters
     public ArrayList<String > getNomEvenement()
     {
