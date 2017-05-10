@@ -32,8 +32,7 @@ public class Notifications extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
-        interceptedNotificationImageView
-                = (ImageView) view.findViewById(R.id.intercepted_notification_logo);
+        interceptedNotificationImageView = (ImageView) view.findViewById(R.id.intercepted_notification_logo) ;
 
         if(!isNotificationServiceEnabled()){
             enableNotificationListenerAlertDialog = buildNotificationServiceAlertDialog();
@@ -92,7 +91,7 @@ public class Notifications extends Fragment {
     }
 
     private AlertDialog buildNotificationServiceAlertDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getContext());
         alertDialogBuilder.setTitle(R.string.app_name);
         alertDialogBuilder.setMessage(R.string.app_name);
         alertDialogBuilder.setPositiveButton(R.string.app_name,

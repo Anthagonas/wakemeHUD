@@ -56,6 +56,21 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         T agregateur = (T) new Agregateur();
 
         fragmentList.add(bob);
+        if (permissionAgenda != PackageManager.PERMISSION_GRANTED) // si l'acces aux calendriers n'est pas autorise :
+        {
+            //demande d'acces aux calendriers de l'appareil
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_CALENDAR},
+                    permissionAgendaTAG);
+            if (permissionAgenda == PackageManager.PERMISSION_GRANTED) // si l'utilisateur accepte l'acces :
+            {
+                fragmentList.add(agenda);
+            }
+        }
+        else // si l'acces aux calendriers est autorise :
+        {
+            fragmentList.add(agenda);
+        }
         fragmentList.add(notif);
         fragmentList.add(meteo);
         fragmentList.add(rss);
