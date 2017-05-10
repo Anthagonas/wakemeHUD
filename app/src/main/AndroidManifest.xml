@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Parametres"></activity>
+        <activity android:name=".Configuration"></activity>
         <service android:name=".RssService" />
     </application>
 </manifest>

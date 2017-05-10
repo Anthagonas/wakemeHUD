@@ -86,7 +86,7 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent myIntent = new Intent(WakeMeHUD.this, Parametres.class); // Chargement de l'activite parametres
+                Intent myIntent = new Intent(WakeMeHUD.this, Configuration.class); // Chargement de l'activite parametres
                 startActivity(myIntent); // lancement de l'activite
             }
         });

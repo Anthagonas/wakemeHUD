@@ -2,15 +2,12 @@ package com.example.anthagonas.wakemehud;
 
 import android.content.ContentResolver;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +17,7 @@ import android.widget.ToggleButton;
  * Created by Vincent on 30/03/17.
  */
 
-public class Parametres extends AppCompatActivity {
+public class Configuration extends AppCompatActivity {
 
                                                 //DECLARATIONS
     //listes pour fragments
@@ -103,7 +100,7 @@ public class Parametres extends AppCompatActivity {
         valide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Parametres.this, "Données modifiées", Toast.LENGTH_LONG).show();
+                Toast.makeText(Configuration.this, "Données modifiées", Toast.LENGTH_LONG).show();
             }
         });
         retour.setOnClickListener(new View.OnClickListener() {
