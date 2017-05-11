@@ -33,7 +33,7 @@ public class AgendaList {
     SimpleDateFormat formatDate = new SimpleDateFormat("EEE dd, hh:mm"); // Format de la date de debut de l'evenement
 
 
-    //un parser URI permettant de recuperer tout les calendriers synchronises avec l'appareil
+    //un parser URI permettant de recuperer le calendrier Anroid de l'appareil
     public static final Uri URI_parser = Uri.parse("content://com.android.calendar/events"); // Pour l'API 2.2 et plus
 
     //Creation d'un contentResolver, qui permet d'acceder aux valeurs des calendriers
@@ -50,7 +50,7 @@ public class AgendaList {
     }
 
     public void initList() {
-        // Recupere la liste de tout les evenements des agendas synchronises avec l'appareil
+        // Recupere la liste de tout les evenements
         Cursor eventCursor = contentResolver.query(URI_parser, CHAMPS, null, null, null);
 
         try {
@@ -77,7 +77,6 @@ public class AgendaList {
                     date = formatDate.format(dateMS); // conversion de la date en jour/heure (voir attribut format)
                     if (dateMS-aujourdhuiMS < septJoursEnMilliSec && dateMS-aujourdhuiMS > 0) // Si la date est comprise dans les 7 jours a venir
                     {
-                        //TODO : n'ajouter que les evenements dont la date est dans les 7 jours a venir
                         this.nomEvenement.add(nomEvent); // recuperation du nom de l'evenement
                         this.dateDepartEvenement.add(date); // recuperation de la date de depart
                         this.dureeEvenement.add(duree); // recuperation de la duree de l'evenement
