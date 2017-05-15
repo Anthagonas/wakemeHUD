@@ -15,11 +15,19 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+
 
 public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
 
-    protected ArrayList <T> fragmentList = new ArrayList <T>();
+    //ArrayList contenant les clefs des fragments
+    protected ArrayList <String> fragmentList = new ArrayList();
+
+    //Valeur du fragment a afficher en premier
     protected int fragmentListPosition = 0;
+
+    //Dictionnaire contenant les fragments
+    Hashtable <String,T> dicoFragments = new Hashtable<String,T>();
 
     //Variable determinant si l'appli est autorisee a utiliser le fragment Agenda :
     int permissionAgenda;
@@ -28,6 +36,8 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
     //Variables pour la detection de mouvements
     private float x1,x2,y1,y2; // position ou le doigt est appuye
     static final int MIN_DISTANCE = 150; // Valeur empirique
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +48,8 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         this.permissionAgenda = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CALENDAR);
 
-        // Ajout des differents fragments
+
+
         T heure = (T) new Heure();
         T notif = (T) new Notifications();
         T meteo = (T) new Meteo();
@@ -46,10 +57,23 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         T agenda = (T) new Agenda();
         T agregateur = (T) new Agregateur();
 
-        fragmentList.add(heure);
-        fragmentList.add(notif);
-        fragmentList.add(meteo);
-        fragmentList.add(rss);
+        dicoFragments.put("heure", heure);
+        dicoFragments.put("notif", notif);
+        dicoFragments.put("meteo", meteo);
+        dicoFragments.put("rss", rss);
+        dicoFragments.put("agenda", agenda);
+        dicoFragments.put("agregateur", agregateur);
+
+
+
+
+// TODO : gestion des fragments a afficher
+        fragmentList.add("heure");
+        fragmentList.add("notif");
+        fragmentList.add("meteo");
+        fragmentList.add("rss");
+        fragmentList.add("agregateur");
+        //Verification permission puis ajout de la clef agenda
         if (permissionAgenda != PackageManager.PERMISSION_GRANTED) // si l'acces aux calendriers n'est pas autorise :
         {
             //demande d'acces aux calendriers de l'appareil
@@ -58,14 +82,14 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
                     permissionAgendaTAG);
             if (permissionAgenda == PackageManager.PERMISSION_GRANTED) // si l'utilisateur accepte l'acces :
             {
-                fragmentList.add(agenda);
+                fragmentList.add("agenda");
             }
         }
         else // si l'acces aux calendriers est autorise :
         {
-            fragmentList.add(agenda);
+            fragmentList.add("agenda");
         }
-        fragmentList.add(agregateur);
+
 
 
         //Configuration du comportement des boutons
@@ -95,7 +119,7 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         { return;} // la suite du code n'est a appliquer que si l'appli demarre
 
         FragmentTransaction fragmentManager = getSupportFragmentManager().beginTransaction();
-        fragmentManager.add(R.id.framelayout, fragmentList.get(0)); // affichage du fragment par defaut (içi, premier dans la liste)
+        fragmentManager.add(R.id.framelayout, dicoFragments.get(fragmentList.get(fragmentListPosition))); // affichage du fragment par defaut
         fragmentManager.commit();
     }
 
@@ -124,7 +148,7 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
                 {
                     fragmentListPosition = (fragmentListPosition+1)%fragmentList.size(); // se déplace dans la liste des fragments
                     FragmentTransaction fragmentManager= getSupportFragmentManager().beginTransaction();
-                    fragmentManager.replace(R.id.framelayout, fragmentList.get(fragmentListPosition)); // Remplace le fragment actuel par le suivant dans la liste
+                    fragmentManager.replace(R.id.framelayout, dicoFragments.get(fragmentList.get(fragmentListPosition))); // Remplace le fragment actuel par le suivant dans la liste
                     fragmentManager.commit();
                 }
                 else if (Math.abs(deltaX) > MIN_DISTANCE && Math.abs(deltaY) < MIN_DISTANCE) // le deplacement du doigt de gauche a droite est significatif
@@ -132,7 +156,7 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
                     fragmentListPosition = (fragmentListPosition-1); // se déplace dans la liste des fragments
                     if (fragmentListPosition<0){ fragmentListPosition = fragmentList.size()-1;}
                     FragmentTransaction fragmentManager= getSupportFragmentManager().beginTransaction();
-                    fragmentManager.replace(R.id.framelayout, fragmentList.get(fragmentListPosition)); // Remplace le fragment actuel par le suivant dans la liste
+                    fragmentManager.replace(R.id.framelayout, dicoFragments.get(fragmentList.get(fragmentListPosition))); // Remplace le fragment actuel par le suivant dans la liste
                     fragmentManager.commit();
                 }
                 break;
