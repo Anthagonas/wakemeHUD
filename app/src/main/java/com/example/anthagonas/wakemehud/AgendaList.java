@@ -53,7 +53,6 @@ public class AgendaList {
         // Recupere la liste de tout les evenements
         Cursor eventCursor = contentResolver.query(URI_parser, CHAMPS, null, null, null);
 
-        try {
             if (eventCursor.getCount() > 0) {
                 eventCursor.moveToFirst();
                 String nomEvent = eventCursor.getString(0);
@@ -96,8 +95,6 @@ public class AgendaList {
                 dateDepartEvenement.add(" ");
                 dureeEvenement.add(" ");
             }
-        } catch (AssertionError ex) {Log.e("AssertionError","Bug majList() :",ex);}
-        eventCursor.close();
     }
 
     public void resetListeEvenements ()
