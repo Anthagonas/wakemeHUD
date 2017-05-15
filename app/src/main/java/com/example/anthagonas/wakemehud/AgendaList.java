@@ -53,48 +53,49 @@ public class AgendaList {
         // Recupere la liste de tout les evenements
         Cursor eventCursor = contentResolver.query(URI_parser, CHAMPS, null, null, null);
 
-            if (eventCursor.getCount() > 0) {
-                eventCursor.moveToFirst();
-                String nomEvent = eventCursor.getString(0);
-                Calendar aujourdhui = Calendar.getInstance();
-                long aujourdhuiMS = aujourdhui.getTimeInMillis(); // Date actuelle en millisec depuis 1 jan 1970
-                long dateMS = eventCursor.getLong(1); // Date de debut de l'evenement en millisec depuis 1 jan 1970
-                String date = formatDate.format(dateMS);
-                String duree = eventCursor.getString(2);
+        if (eventCursor.getCount() > 0)
+        {
+            eventCursor.moveToFirst();
+            String nomEvent = eventCursor.getString(0);
+            Calendar aujourdhui = Calendar.getInstance();
+            long aujourdhuiMS = aujourdhui.getTimeInMillis(); // Date actuelle en millisec depuis 1 jan 1970
+            long dateMS = eventCursor.getLong(1); // Date de debut de l'evenement en millisec depuis 1 jan 1970
+            String date = formatDate.format(dateMS);
+            String duree = eventCursor.getString(2);
 
+            if (dateMS-aujourdhuiMS < septJoursEnMilliSec && dateMS-aujourdhuiMS > 0) // Si la date est comprise dans les 7 jours a venir
+            {
+                this.nomEvenement.add(nomEvent);
+                this.dateDepartEvenement.add(date);
+                this.dureeEvenement.add(duree);
+            }
+            //Pour chaque element du curseur (donc chaque evenement)
+            while (eventCursor.moveToNext())
+            {
+                nomEvent = eventCursor.getString(0);
+                dateMS = eventCursor.getLong(1);
+                duree = eventCursor.getString(2);
+                date = formatDate.format(dateMS); // conversion de la date en jour/heure (voir attribut format)
                 if (dateMS-aujourdhuiMS < septJoursEnMilliSec && dateMS-aujourdhuiMS > 0) // Si la date est comprise dans les 7 jours a venir
                 {
-                    this.nomEvenement.add(nomEvent);
-                    this.dateDepartEvenement.add(date);
-                    this.dureeEvenement.add(duree);
-                }
-                //Pour chaque element du curseur (donc chaque evenement)
-                while (eventCursor.moveToNext()) {
-                    nomEvent = eventCursor.getString(0);
-                    dateMS = eventCursor.getLong(1);
-                    duree = eventCursor.getString(2);
-                    date = formatDate.format(dateMS); // conversion de la date en jour/heure (voir attribut format)
-                    if (dateMS-aujourdhuiMS < septJoursEnMilliSec && dateMS-aujourdhuiMS > 0) // Si la date est comprise dans les 7 jours a venir
-                    {
-                        this.nomEvenement.add(nomEvent); // recuperation du nom de l'evenement
-                        this.dateDepartEvenement.add(date); // recuperation de la date de depart
-                        this.dureeEvenement.add(duree); // recuperation de la duree de l'evenement
-                    }
-                }
-                if (nomEvenement.size() == 0)
-                {
-                    nomEvenement.add("Aucun Evenement");
-                    dateDepartEvenement.add(" ");
-                    dureeEvenement.add(" ");
-
+                    this.nomEvenement.add(nomEvent); // recuperation du nom de l'evenement
+                    this.dateDepartEvenement.add(date); // recuperation de la date de depart
+                    this.dureeEvenement.add(duree); // recuperation de la duree de l'evenement
                 }
             }
-            else
+            if (nomEvenement.size() == 0)
             {
                 nomEvenement.add("Aucun Evenement");
                 dateDepartEvenement.add(" ");
                 dureeEvenement.add(" ");
             }
+            }
+        else
+        {
+            nomEvenement.add("Aucun Evenement");
+            dateDepartEvenement.add(" ");
+            dureeEvenement.add(" ");
+        }
     }
 
     public void resetListeEvenements ()
