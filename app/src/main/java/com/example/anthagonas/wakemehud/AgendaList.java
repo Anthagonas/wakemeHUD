@@ -30,7 +30,7 @@ public class AgendaList {
 
     long septJoursEnMilliSec = 604800000; // 7 jours convertis en millisecondes
 
-    SimpleDateFormat formatDate = new SimpleDateFormat("EEE dd, hh:mm"); // Format de la date de debut de l'evenement
+    SimpleDateFormat formatDate = new SimpleDateFormat("EEE dd, HH:mm"); // Format de la date de debut de l'evenement
 
 
     //un parser URI permettant de recuperer le calendrier Anroid de l'appareil
