@@ -4,12 +4,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.BatteryManager;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 /**
@@ -23,6 +26,19 @@ public class Heure extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         v = inflater.inflate(R.layout.fragment_heure, container, false);
+        String formatHeure;
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+        //format date/heure
+        Boolean date_heure = preferences.getBoolean("example_switch_heure",false);
+        if (date_heure){
+            formatHeure = "HH:mm:ss\nEEE dd MMM";
+        }
+        else{
+            formatHeure = "HH:mm:ss";
+        }
+        TextClock clock = (TextClock) v.findViewById(R.id.textClock);
+        clock.setFormat12Hour(formatHeure);
+        clock.setFormat24Hour(formatHeure);
 
         //affichage de l'etat de la batterie :
         BroadcastReceiver infos_batterie = new BroadcastReceiver() {

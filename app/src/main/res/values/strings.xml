@@ -15,9 +15,9 @@
     <!-- bouton luminosité -->
     <string name="pref_title_lumos">Luminosité maximum en mode HUD</string>
     <string name="pref_description_desciption_lumos">Augmente la luminosité au maximum si pression sur le bouton HUD</string>
-
+<string name="pref_description_heure">Ajoute la date à l\'affichage de l\'heure</string>
     <!-- Heure/Date-->
-    <string name="pref_title_heure_date">Changer le format de l\'heure</string>
+    <string name="pref_title_heure_date">Afficher la date</string>
 
     <string-array name="pref_formats_date">
         <item>Heure</item>
@@ -35,7 +35,7 @@
 
     <!-- Fragments -->
     <!-- Header -->
-    <string name="pref_header_fragments">Géstion des fenêtres </string>
+    <string name="pref_header_fragments">Gestion des fenêtres </string>
 
 
     <!-- Fragment par défaut -->
