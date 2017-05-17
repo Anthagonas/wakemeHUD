@@ -1,0 +1,26 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
+         dismiss it. -->
+    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+    <ListPreference
+        android:title="@string/pref_title_fragment_defaut"
+        android:summary="@string/pref_title_fragment_resume"
+        android:key="liste_fragments_choix_affichage_defaut"
+        android:entries="@array/pref_fragment_defaut_entrees"
+        android:entryValues="@array/pref_fragment_defaut_values"
+        android:defaultValue="1"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"/>
+
+    <MultiSelectListPreference
+        android:key="liste_fragments_choix_affichage"
+        android:summary="@string/resume_choix_fragment_affiche"
+        android:title="@string/liste_fragment_multiliste_titre"
+        android:entries="@array/liste_fenetre_entrees"
+        android:entryValues="@array/liste_fenetre_values"
+        android:defaultValue="@array/liste_fenetre_values"
+        />
+
+
+</PreferenceScreen>

@@ -1,3 +1,97 @@
 <resources>
     <string name="app_name">WakeMeHUD</string>
+    <string name="title_activity_preferences">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Affichage -->
+    <!-- Header -->
+    <string name="pref_header_affichage">Paramètres d\'affichage </string>
+
+    <!-- bouton veille -->
+    <string name="pref_title_verrou">Désactiver la veille automatique</string>
+    <string name="pref_description_desciption_verrou">Désactive la mise en veille automatique du téléphone</string>
+
+    <!-- bouton luminosité -->
+    <string name="pref_title_lumos">Luminosité maximum en mode HUD</string>
+    <string name="pref_description_desciption_lumos">Augmente la luminosité au maximum si pression sur le bouton HUD</string>
+
+    <!-- Heure/Date-->
+    <string name="pref_title_heure_date">Changer le format de l\'heure</string>
+
+    <string-array name="pref_formats_date">
+        <item>Heure</item>
+        <item>Heure et date</item>
+    </string-array>
+
+    <string-array name="pref_formats_date_valeurs">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="pref_formats_date_defaut">
+        <item>1</item>
+    </string-array>
+
+    <!-- Fragments -->
+    <!-- Header -->
+    <string name="pref_header_fragments">Géstion des fenêtres </string>
+
+
+    <!-- Fragment par défaut -->
+    <string name="pref_title_fragment_defaut">Choisir la fenêtre par défaut</string>
+    <string name="pref_title_fragment_resume">Sélectionnez vos fenêtres favorites !</string>
+
+    <string-array name="pref_fragment_defaut_entrees">
+        <item>Heure</item>
+        <item>Notifications</item>
+        <item>Météo</item>
+        <item>Flux Rss</item>
+        <item>Calendrier</item>
+        <item>Agrégateur</item>
+    </string-array>
+
+    <string-array name="pref_fragment_defaut_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="pref_fragment_defaut_defaut">
+        <item>1</item>
+    </string-array>
+
+    <!-- Choix affichage fragments -->
+    <string name="resume_choix_fragment_affiche">Choisissez les fragments à afficher</string>
+    <string name="liste_fragment_multiliste_titre">Choix des fragments affichés</string>
+
+    <string-array name="liste_fenetre_entrees">
+        <item>Heure</item>
+        <item>Notifications</item>
+        <item>Météo</item>
+        <item>Flux Rss</item>
+        <item>Calendrier</item>
+        <item>Agrégateur</item>
+    </string-array>
+
+    <string-array name="liste_fenetre_values">
+        <item>Heure</item>
+        <item>Notifications</item>
+        <item>Météo</item>
+        <item>Flux Rss</item>
+        <item>Calendrier</item>
+        <item>Agrégateur</item>
+    </string-array>
+
+    <!-- Rss -->
+    <!-- Header -->
+    <string name="pref_header_rss">Gérer les flux Rss</string>
+    <!-- Rss -->
+    <string name="pref_title_entrer_rss">Ajouter un flux Rss</string>
+    <string name="pref_default_rss">http://www.pcworld.com/index.rss</string>
+
+
 </resources>

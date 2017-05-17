@@ -2,8 +2,10 @@ package com.example.anthagonas.wakemehud;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -44,6 +47,8 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+// recuperation des preferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         //Verification des autorisations de l'application :
         this.permissionAgenda = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CALENDAR);
@@ -90,8 +95,6 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
             fragmentList.add("agenda");
         }
 
-
-
         //Configuration du comportement des boutons
         Button hud = (Button) findViewById(R.id.hud);
         hud.setOnClickListener(new View.OnClickListener(){
@@ -111,9 +114,12 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent myIntent = new Intent(WakeMeHUD.this, Configuration.class); // Chargement de l'activite parametres
+                finish();
                 startActivity(myIntent); // lancement de l'activite
             }
         });
+
+
 
         if (savedInstanceState != null)
         { return;} // la suite du code n'est a appliquer que si l'appli demarre
@@ -121,6 +127,16 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         FragmentTransaction fragmentManager = getSupportFragmentManager().beginTransaction();
         fragmentManager.add(R.id.framelayout, dicoFragments.get(fragmentList.get(fragmentListPosition))); // affichage du fragment par defaut
         fragmentManager.commit();
+
+        //verrouillage de l'ecran
+        Boolean verrou = preferences.getBoolean("example_switch_verrou",false);
+        if (verrou){
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+        else{
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+
     }
 
     // Quitter l'appli lors de l'appui sur la touche retour
@@ -164,5 +180,4 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
 
         return super.onTouchEvent(event);
     }
-
 }
