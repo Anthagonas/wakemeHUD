@@ -1,0 +1,20 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- These settings headers are only used on tablets. -->
+
+    <header
+        android:fragment="com.example.anthagonas.wakemehud.Configuration$AffichagePreferenceFragment"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/pref_header_affichage" />
+
+    <header
+        android:fragment="com.example.anthagonas.wakemehud.Configuration$FragmentsPreferenceFragment"
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:title="@string/pref_header_fragments" />
+
+    <header
+        android:fragment="com.example.anthagonas.wakemehud.Configuration$RssPreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_header_rss" />
+
+</preference-headers>

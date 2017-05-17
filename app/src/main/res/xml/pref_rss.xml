@@ -1,0 +1,11 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:title="@string/pref_title_entrer_rss"
+        android:capitalize="words"
+        android:defaultValue="@string/pref_default_rss"
+        android:key="example_text_entrer_rss"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
+</PreferenceScreen>

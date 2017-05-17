@@ -1,0 +1,24 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="example_switch_verrou"
+        android:summary="@string/pref_description_desciption_verrou"
+        android:title="@string/pref_title_verrou" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="example_switch_lumos"
+        android:summary="@string/pref_description_desciption_lumos"
+        android:title="@string/pref_title_lumos" />
+
+    <ListPreference
+        android:title="@string/pref_title_heure_date"
+        android:entries="@array/pref_formats_date"
+        android:entryValues="@array/pref_formats_date_valeurs"
+        android:defaultValue="1"
+        android:key="example_list"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
+</PreferenceScreen>
