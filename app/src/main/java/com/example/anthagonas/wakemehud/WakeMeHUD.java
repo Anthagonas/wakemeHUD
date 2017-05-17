@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextClock;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -31,6 +32,7 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
 
     //Dictionnaire contenant les fragments
     Hashtable <String,T> dicoFragments = new Hashtable<String,T>();
+
 
     //Variable determinant si l'appli est autorisee a utiliser le fragment Agenda :
     int permissionAgenda;
@@ -94,6 +96,7 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         {
             fragmentList.add("agenda");
         }
+
 
         //Configuration du comportement des boutons
         Button hud = (Button) findViewById(R.id.hud);
