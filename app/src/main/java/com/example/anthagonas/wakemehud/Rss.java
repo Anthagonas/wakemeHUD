@@ -28,9 +28,6 @@ public class Rss extends Fragment implements OnItemClickListener {
     private ProgressBar progressBar;
     private ListView listView;
 
-    //pour liste extensive
-    private ExpandableListView liste_extensive;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rss, container, false);
@@ -61,6 +58,7 @@ public class Rss extends Fragment implements OnItemClickListener {
     /**
      * Once the {@link RssService} finishes its task, the result is sent to this BroadcastReceiver
      */
+
     private BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

@@ -74,7 +74,7 @@ public class RssParser {
         return title;
     }
 
-    // For the tags title and link, extract their text values.
+    // Extraire les String des TAG Title et Link.
     private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
         String result = "";
         if (parser.next() == XmlPullParser.TEXT) {
