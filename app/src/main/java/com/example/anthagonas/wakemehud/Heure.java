@@ -19,24 +19,29 @@ import android.widget.TextView;
  * Created by anthagonas on 28/03/17.
  */
 
-public class Heure extends Fragment
-{
+public class Heure extends Fragment {
+                                                                        //DESCRIPTION
+    /*Fragment instancie dans l'activite "WakeMeHUD". Permet l'affichage du widget heure et gere le format du dit widget par l'activite "Configuration".
+     Affiche également l'etat courant de la batterie du telephone*/
+
+                                                                    //DECLARATION DES VARIABLES
     View v;
+    String formatHeure;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        v = inflater.inflate(R.layout.fragment_heure, container, false);
-        String formatHeure;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){//a l'affichage du fragment
+        v = inflater.inflate(R.layout.fragment_heure, container, false);//lie le fragment au fichier "fragment_heure.xml" pour le rendu graphique
+
+        //COMPORTEMENT LIE A L'ACTTIVITE "Configuration"'
+        // gestion du du format de l'heure lors de modification dans l'activite "Configuration"
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-        //format date/heure
-        Boolean date_heure = preferences.getBoolean("example_switch_heure",false);
+        Boolean date_heure = preferences.getBoolean("example_switch_heure",false);//recupere la valeur par defaut associee au widget du verrou par sa clef "example_switch_heure"
         if (date_heure){
-            formatHeure = "HH:mm:ss\nEEE dd MMM";
+            formatHeure = "HH:mm:ss\nEEE dd MMM";//format avec date
         }
         else{
-            formatHeure = "HH:mm:ss";
+            formatHeure = "HH:mm:ss";//format sans date
         }
-        TextClock clock = (TextClock) v.findViewById(R.id.textClock);
+        TextClock clock = (TextClock) v.findViewById(R.id.textClock);//liaison du widget à son identifiant dans le fichier "fragment_heure.xml"
         clock.setFormat12Hour(formatHeure);
         clock.setFormat24Hour(formatHeure);
 

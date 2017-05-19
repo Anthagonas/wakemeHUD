@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-
+    <!-- TextView contenant l'etat courant de la batterie du telephone-->
     <TextView
         android:id="@+id/batterie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <!-- TextClock permettant l'affichage de l'heure-->
     <TextClock
         android:id="@+id/textClock"
         android:layout_width="wrap_content"

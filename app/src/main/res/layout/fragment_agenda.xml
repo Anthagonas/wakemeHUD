@@ -5,6 +5,7 @@
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- ListView contenant tous les evenements de l'agenda Android-->
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/eventlistview"
         android:numColumns="auto_fit"

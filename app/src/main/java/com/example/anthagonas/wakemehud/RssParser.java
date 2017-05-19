@@ -15,14 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RssParser {
+                                                                                //DESCRIPTION
+    /*parser décomposant les documents xml et renseignant les objetRss en se servant des balises de ces liens xml comme reperes */
 
+                                                                        //DECLARATION DES VARIABLES
     private static final String TAG_TITLE = "title";
     private static final String TAG_LINK = "link";
     private static final String TAG_RSS = "rss";
-
-    // We don't use namespaces
     private final String ns = null;
 
+    //PREPARE LE PARSER AU FLUX ENTRANT DONNE PAR LE SERVICE
     public List<ObjetRss> parse(InputStream inputStream) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
@@ -35,6 +37,8 @@ public class RssParser {
         }
     }
 
+    //LIT LE FLUX ENTRANT DONNE PAR LE SERVICE
+    //Renseigne les objetRss par le titre et le lien lorsque les données du flux en lui meme ne correspondent ni a une balise de titre ni a une balise de lien
     private List<ObjetRss> readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, null, TAG_RSS);
         String title = null;
@@ -74,7 +78,7 @@ public class RssParser {
         return title;
     }
 
-    // For the tags title and link, extract their text values.
+
     private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
         String result = "";
         if (parser.next() == XmlPullParser.TEXT) {

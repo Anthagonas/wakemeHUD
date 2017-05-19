@@ -16,13 +16,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextClock;
-
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 
 public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
+                                                                                //DESCRIPTION
+    /*Activite principale de l'application : instancie les fragments, prend en charge et applique les preferences donnees par l'utilisateur
+    dans l'activite "Configuration" pour le verrouillage de l'ecran et la gestion des fragmens (non implementee pour le moment car difficulte
+    a recuperer les valeurs des ArrayList du xml des Configurations afin de les comparer aux clefs de notre ArrayList de fragments). Gere les
+    swipes et les boutons HUD et parametres*/
+
+                                                                            //DECLARATION DES VARIABLES
 
     //ArrayList contenant les clefs des fragments
     protected ArrayList <String> fragmentList = new ArrayList();
@@ -43,20 +48,19 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
     static final int MIN_DISTANCE = 150; // Valeur empirique
 
 
-
+                                                                            //A LA CREATION DE L'ACTIVITE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); //lie l'activite au fichier "activity_main.xml" pour le rendu graphique
 
-// recuperation des preferences
+        // RECUPERATION DES PREFERENCES
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         //Verification des autorisations de l'application :
-        this.permissionAgenda = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CALENDAR);
+        this.permissionAgenda = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR);
 
 
-
+        //INSTANCIATION DES FRAGMENTS
         T heure = (T) new Heure();
         T notif = (T) new Notifications();
         T meteo = (T) new Meteo();
@@ -64,6 +68,8 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         T agenda = (T) new Agenda();
         T agregateur = (T) new Agregateur();
 
+        /*preparation des dictionnaires associant les fragments a leurs clefs, ceci permettra de selectionner les fragments affiches et celui affiche
+        par defaut au lancement de l'application selon les preferences de l'utilisateur definie dans l'activite "Configuration"*/
         dicoFragments.put("heure", heure);
         dicoFragments.put("notif", notif);
         dicoFragments.put("meteo", meteo);
@@ -71,16 +77,16 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         dicoFragments.put("agenda", agenda);
         dicoFragments.put("agregateur", agregateur);
 
-
-
-
-// TODO : gestion des fragments a afficher
+        /*ajout des clefs des fragments dans l'ArrayList, cet ajout, pour l'instant automatique sera a modifier
+        quand la gestion des fragments depuis l'activité "Configuration" sera implementee*/
         fragmentList.add("heure");
         fragmentList.add("notif");
         fragmentList.add("meteo");
         fragmentList.add("rss");
         fragmentList.add("agregateur");
-        //Verification permission puis ajout de la clef agenda
+
+        /*Verification de la permission puis ajout de la clef agenda. Cette verification de permission doit etre effectuee pour les donnees contenues dans l'appareil,
+        les donnees recuperees par appels reseau n'ont pas besoin de demande de permission et doivent juste être declares dans le manifeste*/
         if (permissionAgenda != PackageManager.PERMISSION_GRANTED) // si l'acces aux calendriers n'est pas autorise :
         {
             //demande d'acces aux calendriers de l'appareil
@@ -98,11 +104,20 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         }
 
 
-        //Configuration du comportement des boutons
-        Button hud = (Button) findViewById(R.id.hud);
-        hud.setOnClickListener(new View.OnClickListener(){
+        if (savedInstanceState != null)
+        { return;} // la suite du code n'est a appliquer que si l'application demarre
+
+        FragmentTransaction fragmentManager = getSupportFragmentManager().beginTransaction();
+        fragmentManager.add(R.id.framelayout, dicoFragments.get(fragmentList.get(fragmentListPosition))); // affichage du fragment par defaut
+        fragmentManager.commit();
+
+        //COMPORTEMENT DES BOUTONS
+
+        //bouton HUD
+        Button hud = (Button) findViewById(R.id.hud); //liaison du bouton HUD à son identifiant dans le fichier "activity_main.xml"
+        hud.setOnClickListener(new View.OnClickListener(){ //attribution d'un listener de clic au bouton
             @Override
-            public void onClick(View v)
+            public void onClick(View v) //au clic :
             {
                 FrameLayout layout = (FrameLayout) findViewById(R.id.framelayout); // Recupere le framelayout
                 layout.setScaleY(-layout.getScaleY()); // retourne le framelayout ( et donc le fragment affiché)
@@ -110,43 +125,31 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         });
 
 
-
-        Button parametres = (Button) findViewById(R.id.parametres);
+        //bouton parametre
+        Button parametres = (Button) findViewById(R.id.parametres);//liaison du bouton parametre à son identifiant dans le fichier "activity_main.xml"
         parametres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
-            {
-                Intent myIntent = new Intent(WakeMeHUD.this, Configuration.class); // Chargement de l'activite parametres
+            { //au clic :
+                Intent myIntent = new Intent(WakeMeHUD.this, Configuration.class); // Instanciation de l'activite "Configuration" depuis l'activite "WakeMeHUD"
+                /*fin de l'activite WakeMeHUD necessaire pour la prise en compte dynamique des changements des parametres par l'utilisateur
+                (obligation de quitter l'application et de la relancer, sinon). se renseigner sur le methode onResume() et onRestart() pour eviter de fermer l'activite :*/
                 finish();
-                startActivity(myIntent); // lancement de l'activite
+                startActivity(myIntent); // lancement de l'activite "Configuration"
             }
         });
 
 
-
-        if (savedInstanceState != null)
-        { return;} // la suite du code n'est a appliquer que si l'appli demarre
-
-        FragmentTransaction fragmentManager = getSupportFragmentManager().beginTransaction();
-        fragmentManager.add(R.id.framelayout, dicoFragments.get(fragmentList.get(fragmentListPosition))); // affichage du fragment par defaut
-        fragmentManager.commit();
-
-        //verrouillage de l'ecran
-        Boolean verrou = preferences.getBoolean("example_switch_verrou",false);
-        if (verrou){
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        //COMPORTEMENT LIE A L'ACTTIVITE "Configuration"'
+        // gestion du verrouillage automatique de l'ecran lors de modification dans l'activite "Configuration"
+        Boolean verrou = preferences.getBoolean("example_switch_verrou",false); //recupere la valeur par defaut associee au widget du verrou par sa clef "example_switch_verrou"
+        if (verrou){//
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//empeche le verrouillage par ajout de "flag"
         }
         else{
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//enleve les "flags" qui empechent le verrouillage
         }
 
-    }
-
-    // Quitter l'appli lors de l'appui sur la touche retour
-    @Override
-    public void onBackPressed()
-    {
-        finish();
     }
 
     //Swipe entre les different fragments
@@ -182,5 +185,11 @@ public class WakeMeHUD<T extends Fragment> extends AppCompatActivity {
         }
 
         return super.onTouchEvent(event);
+    }
+    // Quitter l'application lors de l'appui sur la touche retour
+    @Override
+    public void onBackPressed()
+    {
+        finish();
     }
 }
