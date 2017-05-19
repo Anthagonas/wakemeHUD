@@ -27,6 +27,8 @@ public class Heure extends Fragment {
                                                                     //DECLARATION DES VARIABLES
     View v;
     String formatHeure;
+
+                                                                    //A L'AFFICHAGE DU FRAGMENT
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){//a l'affichage du fragment
         v = inflater.inflate(R.layout.fragment_heure, container, false);//lie le fragment au fichier "fragment_heure.xml" pour le rendu graphique

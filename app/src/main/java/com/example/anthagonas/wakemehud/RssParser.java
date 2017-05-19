@@ -64,6 +64,7 @@ public class RssParser {
         return items;
     }
 
+    //Determine les balises Link du xml de lien Rss
     private String readLink(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, ns, TAG_LINK);
         String link = readText(parser);
@@ -71,6 +72,7 @@ public class RssParser {
         return link;
     }
 
+    //Determine les balises Titre du xml de lien Rss
     private String readTitle(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, ns, TAG_TITLE);
         String title = readText(parser);
@@ -78,7 +80,7 @@ public class RssParser {
         return title;
     }
 
-
+    // Extrait le contenu entre les balises Titre et les balises Lien du xml de lien Rss
     private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
         String result = "";
         if (parser.next() == XmlPullParser.TEXT) {

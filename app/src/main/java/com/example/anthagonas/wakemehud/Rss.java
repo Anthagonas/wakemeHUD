@@ -31,7 +31,6 @@ public class Rss extends Fragment implements OnItemClickListener {
     private ProgressBar progressBar; //barre d'attente d'affichage des donnees
     private ListView listView; //ListView contenant les donnees
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rss, container, false);//lie le fragment au fichier "fragment_rss.xml" pour le rendu graphique

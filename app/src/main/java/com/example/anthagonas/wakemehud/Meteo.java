@@ -47,7 +47,7 @@ public class Meteo extends Fragment {
         // Required empty public constructor
     }
 
-
+                                                                                //A L'AFFICHAGE DU FRAGMENT
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {//a l'affichage du fragment
         final View v = inflater.inflate(R.layout.fragment_weather, container, false);//lie le fragment au fichier "fragment_weather.xml" pour le rendu graphique

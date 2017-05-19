@@ -20,6 +20,7 @@ public class Agregateur extends Fragment {
                                                                         //DESCRIPTION
     /*Fragment instancie dans l'activite "WakeMeHUD". Permet l'affichage du widget heure et gere le format du dit widget par l'activite "Configuration".
      Affiche également l'etat courant de la batterie du telephone*/
+                                                                        //A L'AFFICHAGE DU FRAGMENT
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
