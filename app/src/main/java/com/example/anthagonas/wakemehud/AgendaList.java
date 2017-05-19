@@ -83,14 +83,14 @@ public class AgendaList {
                     this.dureeEvenement.add(duree); // recuperation de la duree de l'evenement
                 }
             }
-            if (nomEvenement.size() == 0)
+            if (nomEvenement.size() == 0) // Si aucun evenement ne survient dans les 7 jours
             {
                 nomEvenement.add("Aucun Evenement");
                 dateDepartEvenement.add(" ");
                 dureeEvenement.add(" ");
             }
             }
-        else
+        else // Si le calendrier android ne contient pas d'evenements
         {
             nomEvenement.add("Aucun Evenement");
             dateDepartEvenement.add(" ");
