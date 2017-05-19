@@ -15,14 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RssParser {
+                                                                                //DESCRIPTION
+    /*parser décomposant les documents xml et renseignant les objetRss en se servant des balises de ces liens xml comme reperes */
 
+                                                                        //DECLARATION DES VARIABLES
     private static final String TAG_TITLE = "title";
     private static final String TAG_LINK = "link";
     private static final String TAG_RSS = "rss";
-
-    // We don't use namespaces
     private final String ns = null;
 
+    //PREPARE LE PARSER AU FLUX ENTRANT DONNE PAR LE SERVICE
     public List<ObjetRss> parse(InputStream inputStream) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
@@ -35,6 +37,8 @@ public class RssParser {
         }
     }
 
+    //LIT LE FLUX ENTRANT DONNE PAR LE SERVICE
+    //Renseigne les objetRss par le titre et le lien lorsque les données du flux en lui meme ne correspondent ni a une balise de titre ni a une balise de lien
     private List<ObjetRss> readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, null, TAG_RSS);
         String title = null;
@@ -60,6 +64,7 @@ public class RssParser {
         return items;
     }
 
+    //Determine les balises Link du xml de lien Rss
     private String readLink(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, ns, TAG_LINK);
         String link = readText(parser);
@@ -67,6 +72,7 @@ public class RssParser {
         return link;
     }
 
+    //Determine les balises Titre du xml de lien Rss
     private String readTitle(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, ns, TAG_TITLE);
         String title = readText(parser);
@@ -74,7 +80,7 @@ public class RssParser {
         return title;
     }
 
-    // Extraire les String des TAG Title et Link.
+    // Extrait le contenu entre les balises Titre et les balises Lien du xml de lien Rss
     private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
         String result = "";
         if (parser.next() == XmlPullParser.TEXT) {

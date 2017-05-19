@@ -11,10 +11,12 @@ import android.view.ViewGroup;
  */
 
 public class Notifications extends Fragment {
-
+                                                                                        //DESCRIPTION
+    /*Fragment instancie par l'activite WakeMeHUD mais encore non implemente car nombreux echecs pour raison encore
+    indeterminee. Permettrait a terme d'afficher le flux de notification "push" de l'appareil*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_notifications, container, false);
+        return inflater.inflate(R.layout.fragment_notifications, container, false);//lie le fragment au fichier "fragment_notifications.xml" pour le rendu graphique
     }
 }

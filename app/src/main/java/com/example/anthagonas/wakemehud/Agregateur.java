@@ -17,10 +17,15 @@ import android.widget.RelativeLayout;
  */
 
 public class Agregateur extends Fragment {
+                                                                        //DESCRIPTION
+    /*Fragment instancie dans l'activite "WakeMeHUD". Permet l'affichage du widget heure et gere le format du dit widget par l'activite "Configuration".
+     Affiche également l'etat courant de la batterie du telephone*/
+                                                                        //A L'AFFICHAGE DU FRAGMENT
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.fragment_agregateur, container, false);
+        View v = inflater.inflate(R.layout.fragment_agregateur, container, false);/*lie le fragment au fichier "fragment_agregateur.xml" pour le rendu graphique.
+        L'integralite du rendu de ce fragment se fait au niveau du xml avec l'inclusion de trois fragments dans le "LinearLayout"*/
         LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.linearlayout);
         linearLayout.setOnTouchListener(new View.OnTouchListener()
         {

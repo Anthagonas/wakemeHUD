@@ -6,6 +6,9 @@ package com.example.anthagonas.wakemehud;
 
 public class MeteoModele {
 
+                                                                            //DESCRIPTION
+    /*Objet instancie dans le fragment "Meteo". Contient les geters et les seters permettant de "stocker les donnees parsees suite a la requete json et selon les criteres voulus*/
+
     private String nomVille;
     private String pays;
     private String etatMeteo;

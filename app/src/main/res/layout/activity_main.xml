@@ -9,6 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
+        <!-- FrameLayout contenant le layout du fragment en cours-->
         <FrameLayout
             android:id="@+id/framelayout"
             android:layout_height="wrap_content"
@@ -16,6 +17,7 @@
             android:scaleY="1"
             android:layout_centerInParent="true"/>
 
+        <!-- Bouton HUD permettant de d'effectuer l'effet miroir sur le FrameLayout contenant le layout du fragment en cours-->
         <Button
             android:id="@+id/hud"
             android:layout_width="wrap_content"
@@ -24,7 +26,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true" />
 
-
+        <!-- bouton permettant d'acceder a l'activite "Configuration"-->
         <Button
             android:id="@+id/parametres"
             android:layout_width="wrap_content"

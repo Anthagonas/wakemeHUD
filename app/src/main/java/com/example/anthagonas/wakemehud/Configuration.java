@@ -33,6 +33,14 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class Configuration extends AppCompatPreferenceActivity {
+
+                                                                                        //DESCRIPTION
+    /*Activite particuliere pre-implementee permettant la sauvegarde des preferences d'une application android, et appellee lors d'une pression sur le bouton "parametres" de "WakeMeHUD".
+    Cette activite a ete obtenue en effectuant les manipulations suivantes dans Android Studio : clic droit sur "App", "new", "Activity", "Settings Activity"
+    Le fonctionnement et les methodes de cette activite n'ayant pas encore ete completement assimile, le code ne peut pas reellement etre obtimise.
+    Cette activite utilise un type de documents xml comprennants une racine particuliere, assimilee a un "Layout":"PreferenceScreen".
+    Elle comprend moins de widgets utilisables leur liaison de leur comportement se fait de maniere differente (par exemple : les widgets n'ont pas d'identifiant mais des clefs)*/
+
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
@@ -143,6 +151,7 @@ public class Configuration extends AppCompatPreferenceActivity {
     /**
      * {@inheritDoc}
      */
+    //Permet de creer les headers des fragments de gestion des preferences
     @Override
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void onBuildHeaders(List<Header> target) {
@@ -160,10 +169,7 @@ public class Configuration extends AppCompatPreferenceActivity {
                 || FragmentsPreferenceFragment.class.getName().equals(fragmentName);
     }
 
-    /**
-     * This fragment shows general preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
+    //Fragment de preference permettant de gerer l'affichage de l'application (le verrouillage automatique, le format de l'heure, et a terme la luminosite
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class AffichagePreferenceFragment extends PreferenceFragment {
         @Override
@@ -190,10 +196,7 @@ public class Configuration extends AppCompatPreferenceActivity {
         }
     }
 
-    /**
-     * This fragment shows notification preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
+    //Fragment de preference permettant a terme d'ajouter des Flux Rss A la liste de flux Rss, de les supprimer, ou de les modifier
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class RssPreferenceFragment extends PreferenceFragment {
         @Override
@@ -220,10 +223,8 @@ public class Configuration extends AppCompatPreferenceActivity {
         }
     }
 
-    /**
-     * This fragment shows data and sync preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
+
+    //Fragment de preference permettant a terme de gerer le fragment de l'application affiche par defaut ou les fragments a occulter
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class FragmentsPreferenceFragment extends PreferenceFragment {
         @Override
@@ -250,10 +251,10 @@ public class Configuration extends AppCompatPreferenceActivity {
         }
     }
 
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         Intent myIntent = new Intent(Configuration.this, WakeMeHUD.class); // Chargement de l'activite parametres
-        finish();
+
         startActivity(myIntent); // lancement de l'activite
+        finish();
     }
 }

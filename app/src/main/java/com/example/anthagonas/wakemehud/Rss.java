@@ -24,15 +24,21 @@ import android.widget.Toast;
 import java.util.List;
 
 public class Rss extends Fragment implements OnItemClickListener {
+                                                                                    //DESCRIPTION
+    /*Fragment instancie dans l'activite "WakeMeHUD". Permet l'affichage d'un flux rss recuperees par appel reseau utilisant un service en dans un widget de type "ListView".*/
 
-    private ProgressBar progressBar;
-    private ListView listView;
+                                                                                //DECLARATION DES VARIABLES
+    private ProgressBar progressBar; //barre d'attente d'affichage des donnees
+    private ListView listView; //ListView contenant les donnees
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rss, container, false);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        listView = (ListView) view.findViewById(R.id.listView);
+        View view = inflater.inflate(R.layout.fragment_rss, container, false);//lie le fragment au fichier "fragment_rss.xml" pour le rendu graphique
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);/*liaison de la barre d'attente à son identifiant dans le fichier "fragment_heure.xml"*/
+        listView = (ListView) view.findViewById(R.id.listView);/*liaison de la ListView à son identifiant dans le fichier "fragment_heure.xml"*/
+
+        //PERMISSION DE SWIPE
+        //permet de swiper depuis sur le ScrollView du fragment ver sun autre. Sinon, le swipe n'est pas pris en compte
         listView.setOnItemClickListener(this);
         listView.setOnTouchListener(new View.OnTouchListener()
         {
@@ -44,26 +50,27 @@ public class Rss extends Fragment implements OnItemClickListener {
         return view;
     }
 
+    //Le service effectuant l'appel reseau est mis en route a la creation de l'activite "WakeMeHUD"
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         startService();
     }
 
+    //DEMARRAGE DU SERVICE
+    //methode permettant de demarrer le service
     private void startService() {
         Intent intent = new Intent(getActivity(), RssService.class);
         getActivity().startService(intent);
     }
 
-    /**
-     * Once the {@link RssService} finishes its task, the result is sent to this BroadcastReceiver
-     */
-
+    //FIN DU SERVICE
+    //a la fin de tache du service, le resultat est envoye a un BroadcastReceiver
     private BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            progressBar.setVisibility(View.GONE);
-            List<ObjetRss> items = (List<ObjetRss>) intent.getSerializableExtra(RssService.ITEMS);
+            progressBar.setVisibility(View.GONE);//enleve la barre d'attente
+            List<ObjetRss> items = (List<ObjetRss>) intent.getSerializableExtra(RssService.ITEMS);//affichage de la liste remplie d'"ObjetRSS"
             if (items != null) {
                 RssAdapteur adapter = new RssAdapteur(getActivity(), items);
                 listView.setAdapter(adapter);

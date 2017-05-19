@@ -9,11 +9,14 @@ tools:context="com.example.anthagonas.wakemehud.WeatherFragment"
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <!-- ScrollView permettant le defilement vers le bas lors d'une surcharge d'information a l'ecran-->
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- LinearLayout permettant l'affichage des informations les unes a la suite des autres sur tout l'espace -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,6 +25,7 @@ tools:context="com.example.anthagonas.wakemehud.WeatherFragment"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true">
 
+            <!-- TextView affichant le titre du fragment-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,12 +34,14 @@ tools:context="com.example.anthagonas.wakemehud.WeatherFragment"
                 android:textSize="50sp"
                 android:layout_marginBottom="20dp"/>
 
+            <!-- TextView affichant la temperature maximale au coordonnee donnees-->
             <TextView
                 android:id="@+id/maxTempView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30sp" />
 
+            <!-- TextView affichant la temperature minimale au coordonnee donnees-->
             <TextView
                 android:id="@+id/minTempView"
                 android:layout_width="wrap_content"
@@ -43,6 +49,7 @@ tools:context="com.example.anthagonas.wakemehud.WeatherFragment"
                 android:layout_weight="1"
                 android:textSize="30sp" />
 
+            <!-- TextView affichant le statut du temps aux coordonnees donnees-->
             <TextView
                 android:id="@+id/weatherStatus"
                 android:layout_width="wrap_content"
@@ -50,8 +57,7 @@ tools:context="com.example.anthagonas.wakemehud.WeatherFragment"
                 android:gravity="right"
                 android:textSize="30sp"/>
 
-
-
+            <!-- TextView affichant le nom de la ville aux coordonnees donnees-->
             <TextView
                 android:id="@+id/cityName"
                 android:layout_width="wrap_content"
